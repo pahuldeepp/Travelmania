@@ -1,0 +1,156 @@
+/* General styles */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: url("./loginback.jpg") no-repeat center center fixed;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.container {
+  width: 25em;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 2em;
+  border-radius: 0.8em;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  position: relative;
+  animation: fadeIn 1s ease-in-out;
+}
+
+h1.title {
+  font-size: 1.8em;
+  color: #ff6f61;
+  margin-bottom: 0.5em;
+}
+
+p.subtitle {
+  font-size: 1em;
+  color: #333;
+  margin-bottom: 1.5em;
+}
+
+/* Input styles */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group {
+  margin-bottom: 1.5em;
+  text-align: left;
+}
+
+.input-group label {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.5em;
+  display: block;
+}
+
+.input-group i {
+  margin-right: 0.5em;
+}
+
+form input {
+  font-size: 1em;
+  padding: 0.8em;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+form input:focus {
+  border-color: #6e45e2;
+  box-shadow: 0 0 10px rgba(110, 69, 226, 0.5);
+  outline: none;
+}
+
+/* Button styles */
+form button {
+  padding: 0.8em;
+  color: #fff;
+  background-color: #ff6f61;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-top: 0.5em;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+form button:hover {
+  background-color: #ffa07a;
+  transform: translateY(-3px);
+}
+
+/* Toggle button styles */
+#toggle-button,
+#toggle-button-back {
+  display: block;
+  margin-top: 1em;
+  padding: 0.8em;
+  color: #fff;
+  background-color: #ff6f61;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
+  width: 100%;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  text-align: center;
+}
+
+#toggle-button:hover,
+#toggle-button-back:hover {
+  background-color: #ffa07a;
+  transform: translateY(-3px);
+}
+
+.hidden {
+  display: none;
+}
+/* Footer styling */
+footer {
+  background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent dark background */
+  color: #ffffff; /* White text */
+  text-align: center;
+  padding: 15px 0;
+  font-size: 0.9em;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 1000; /* Ensures it stays on top of other content */
+}
+
+footer p {
+  margin: 5px 0;
+}
+
+footer p:first-of-type {
+  font-weight: bold; /* Highlight the copyright notice */
+}
+
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

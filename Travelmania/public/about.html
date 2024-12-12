@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TravelMania</title>
+    <link rel="stylesheet" href="css/constyles.css">
+</head>
+<body>
+    <!-- Navbar Section with Moving TravelMania -->
+    <div id="navbar">
+        <div id="logo">
+            <img src="travelmania.webp" alt="TravelMania Logo" width="80px" height="auto">
+        </div>
+        <div id="scrolling-text">
+            <span>TravelMania</span>
+        </div>
+        <div id="nav-links">
+            <a href="/home" id="home">Home</a>
+            <a href="/contact" id="about">Contact Us</a>
+            <a href="/top" id="top-destinations">Top Destinations</a>
+        </div>
+    </div>
+
+    <!-- Background Image Section -->
+    <div id="background_img"></div>
+
+    <!-- Center Section -->
+    <div id="center-section">
+        <div id="formtext">Let's keep in touch</div>
+        <div id="boldtext">Contact Us</div>
+    </div>
+
+    <!-- Contact Section -->
+    <div id="contact-section">
+        <!-- Contact Form -->
+        <div id="right-side">
+            <form id="contact-form">
+                <input type="text" id="name" name="name" placeholder="Your name" required>
+                <input type="email" id="email" name="email" placeholder="Email" required>
+                <textarea name="message" id="message" placeholder="Message and please upload the photo of suggested places below" required></textarea>
+                <label for="file">Upload Photos:</label>
+                <input type="file" id="file" name="file" accept=".jpg, .jpeg" required>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+
+        <!-- Contact Details -->
+        <div id="middle-side">
+            <div id="contact"><strong>Our Contact</strong></div>
+            <div>Address: 75 Ritchie Street,<br>Winnipeg, MB</div>
+            <div>Phone: +1 431 388 6323</div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <p>&copy; 2024 TravelMania. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // WebSocket setup
+        const ws = new WebSocket("ws://localhost:4000/contactws");
+
+        ws.onopen = () => {
+            console.log("WebSocket connection established for /contactws");
+        };
+
+        ws.onmessage = (event) => {
+            console.log("Message from server:", event.data);
+        };
+
+        ws.onerror = (error) => {
+            console.error("WebSocket error:", error);
+        };
+
+        ws.onclose = () => {
+            console.log("WebSocket connection closed for /contactws");
+        };
+
+        // Handle form submission
+        document.getElementById("contact-form").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const name = document.getElementById("name").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const message = document.getElementById("message").value.trim();
+            const fileInput = document.getElementById("file");
+            const file = fileInput.files[0];
+
+            // Validate form fields
+            if (!name || !email || !message || !file) {
+                alert("Please fill in all fields and select a file!");
+                return;
+            }
+
+            const metadata = {
+                name,
+                email,
+                message,
+                fileName: file.name,
+                fileType: file.type,
+            };
+
+            // Ensure WebSocket connection is open before sending data
+            if (ws.readyState === WebSocket.OPEN) {
+                // Send metadata
+                ws.send(JSON.stringify(metadata));
+                console.log("Metadata sent:", metadata);
+
+                // Send file as binary
+                const reader = new FileReader();
+                reader.onload = () => {
+                    ws.send(reader.result);
+                    console.log("File sent:", file.name);
+                };
+                reader.onerror = (err) => {
+                    console.error("Error reading file:", err);
+                };
+                reader.readAsArrayBuffer(file);
+            } else {
+                console.error("WebSocket connection is not open.");
+                alert("WebSocket connection is not established. Please try again.");
+            }
+        });
+    </script>
+</body>
+</html>

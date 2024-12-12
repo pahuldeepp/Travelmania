@@ -1,0 +1,200 @@
+/* General Body Styling */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #d4d2d2;
+    color: #333;
+    height: 100%;
+}
+
+/* Navbar Styling - Beautiful and Sober */
+#navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px; /* Increase horizontal padding for a balanced look */
+    background-color: rgba(230, 228, 228, 0.8); /* Light transparent background */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    color: #2c3e50; /* Darker text color for contrast */
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(8px); /* Blur for elegance */
+}
+
+/* Logo Styling */
+#logo img {
+    width: 80px;
+    opacity: 0.9; /* Slightly transparent for smoothness */
+    transition: opacity 0.3s ease;
+}
+
+#logo img:hover {
+    opacity: 1; /* Full opacity on hover */
+}
+
+/* Navigation Links Styling */
+#nav-links {
+    display: flex;
+    gap: 25px; /* Space between navigation links */
+}
+
+#nav-links a {
+    color: #2c3e50; /* Sober dark color */
+    font-weight: 500; /* Medium font weight for elegance */
+    padding: 10px 15px;
+    text-decoration: none;
+    text-transform: uppercase; /* Make the text uppercase for clarity */
+    border-radius: 20px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    background-color: rgba(44, 62, 80, 0.05); /* Light background on links */
+}
+
+#nav-links a:hover {
+    background-color: #3498db; /* Beautiful blue on hover */
+    color: white; /* White text on hover */
+}
+
+/* Scrolling Text - Subtle and Elegant */
+#scrolling-text span {
+    display: inline-block;
+    font-size: 34px; /* Reduced font size for a more refined look */
+    font-weight: 600; /* Slightly bold */
+    color: #2980b9; /* Soft blue for the scrolling text */
+    white-space: nowrap;
+    animation: scroll 15s linear infinite; /* Slower scrolling for elegance */
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+/* Hover Effect for the Logo */
+#logo:hover img {
+    opacity: 1;
+}
+
+/* Navbar Mobile Responsive */
+@media (max-width: 768px) {
+    #nav-links {
+        flex-direction: column;
+        gap: 10px; /* Less gap on smaller screens */
+    }
+
+    #navbar {
+        padding: 10px 20px;
+    }
+
+    #scrolling-text span {
+        font-size: 18px;
+    }
+}
+
+/* Discover the Adventure styling - Sideways animation */
+/* Discover the Adventure styling - Sideways animation */
+#discover {
+    font-size: 42px;
+    font-weight: bold;
+    color: rgb(79, 79, 79);
+    text-align: center;
+    position: relative;
+    top:120px;
+    left: -200px; /* Starts from the left side */
+    opacity: 0; /* Starts invisible */
+    animation: slideInFadeIn 3s ease-in-out forwards; /* 3s for effect duration */
+    animation-delay: 1s; /* Starts after 1 second */
+    margin-bottom: 30px; /* Adds space below the Discover text */
+}
+
+
+/* Keyframes for sliding in from the left and fading in */
+@keyframes slideInFadeIn {
+    0% {
+        left: -200px;
+        opacity: 0;
+    }
+    100% {
+        left: 0;
+        opacity: 1;
+    }
+}
+
+
+/* Cities Section */
+#cities {
+    display: flex;
+    justify-content: center;
+    margin-top: 150px; /* 40px + 50px more down */
+    padding: 20px;
+    z-index: 2;
+}
+
+#city-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    width: 100%;
+}
+
+/* Individual City Cards */
+.city-card {
+    height: 150px;
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-align: center;
+    border-radius: 15px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.city-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.city-card:hover::before {
+    opacity: 1;
+}
+
+.city-card:hover {
+    transform: translateY(-10px);
+    cursor: pointer;
+}
+
+.city-name {
+    font-size: 20px;
+    position: relative;
+    z-index: 2;
+    margin-top: 50px;
+}
+
+.more-link {
+    position: relative;
+    z-index: 2;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.city-card:hover .more-link {
+    color: #f1c40f;
+}

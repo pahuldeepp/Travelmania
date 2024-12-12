@@ -1,0 +1,60 @@
+{% import "nav.njk" as nav %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ cityName }} - TravelMania</title>
+    <link rel="stylesheet" href="/css/{{ cityName | lower }}.css">
+
+</head>
+<body>
+
+    <!-- Use the navbar macro -->
+    {{ nav.navbar() }}
+
+    <!-- Main Content Section -->
+    <div id="main-content">
+        <h1 class="city-title">{{ cityName }}</h1>
+        <p class="city-description">{{ cityDescription }}</p>
+
+        <!-- City Wikipedia Link -->
+        <p class="city-learn-more">
+            Learn more about 
+            <a href="https://en.wikipedia.org/wiki/{{ cityName | replace(' ', '_') }}" target="_blank">
+                {{ cityName }}
+            </a>
+        </p>
+
+        <!-- City Image with Clickable Link -->
+        <div id="city-image">
+            <a href="https://en.wikipedia.org/wiki/{{ cityName | replace(' ', '_') }}" target="_blank">
+                <div style="background-image: url('{{ cityImage }}');"></div>
+            </a>
+        </div>
+
+        <!-- Top Attractions -->
+        <div id="attractions-heading">
+            <h2>Top Attractions in {{ cityName }}</h2>
+        </div>
+
+        <div id="attractions">
+            {% for attraction in attractions %}
+            <div class="attraction-card">
+                <img src="{{ attraction.image }}" alt="{{ attraction.name }}">
+                <p>{{ attraction.name }}</p>
+                <p>
+                    <a href="https://en.wikipedia.org/wiki/{{ attraction.name | replace(' ', '_') }}" target="_blank">
+                        Wikipedia
+                    </a>
+                    <a href="https://www.google.com/search?tbm=isch&q={{ attraction.name | urlencode }}" target="_blank">
+                        Google Pictures
+                    </a>
+                </p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

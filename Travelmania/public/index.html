@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TravelMania</title>
+    <link rel="icon" type="image/webp" sizes="32x32" href="/logo.webp">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Navbar Section -->
+    <div id="navbar">
+        <div id="logo">
+            <img src="travelmania.webp" alt="TravelMania Logo" width="80px" height="auto">
+        </div>
+        <div id="scrolling-text">
+            <span>TravelMania</span>
+        </div>
+        <div id="nav-links">
+            <a href="/home" id="home">Home</a>
+            <a href="/contact" id="about">Contact Us</a>
+            <a href="/top" id="top-destinations">Top Destinations</a>
+        </div>
+    </div>
+
+    <!-- Background Section -->
+    <div id="background_img"></div>
+    
+    <!-- Form Section -->
+    <div id="formdiv">
+        <form id="myform">
+            <p>Where do you want to go?</p>
+            <p>Family Name</p>
+            <input type="text" id="travel_family" name="travel_family" placeholder="Family Name">
+            <p>Cities:</p>
+            <select id="travel_destination" name="travel_destination" required>
+                <option value="" disabled selected>Select a city</option>
+                <option value="new_york">New York</option>
+                <option value="london">London</option>
+                <option value="paris">Paris</option>
+                <option value="tokyo">Tokyo</option>
+                <option value="sydney">Sydney</option>
+                <option value="toronto">Toronto</option>
+                <option value="dubai">Dubai</option>
+                <option value="hong_kong">Hong Kong</option>
+                <option value="singapore">Singapore</option>
+                <option value="san_francisco">San Francisco</option>
+                <option value="berlin">Berlin</option>
+                <option value="los_angeles">Los Angeles</option>
+            </select>
+            <p>Select travel date and time:</p>
+            <input type="date" id="travel_date" name="travel_date" required>
+            <p>Select number of passengers: </p>
+            <input type="number" id="travel_num" name="travel_num" required>
+            <br><br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+    <div id="explore-container">
+        <a href="/top" id="explore-button">Let's Explore!</a>
+    </div>
+
+    <!-- Footer Section -->
+ <!-- Footer Section -->
+<footer id="footer">
+    <p>&copy; 2024 TravelMania. All rights reserved.</p>
+    
+</footer>
+
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const elem = document.getElementById('background_img');
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+
+        // Predefined set of nature/travel Picsum IDs
+        const naturePicsumIds = [1025, 1036, 1043, 1051, 1074, 1084];
+        const randomId = naturePicsumIds[Math.floor(Math.random() * naturePicsumIds.length)];
+
+        // Generate the URL
+        const imageUrl = `https://picsum.photos/id/${randomId}/${width}/${height}`;
+
+        // Set the background
+        elem.style.backgroundImage = `url("${imageUrl}")`;
+        elem.style.backgroundSize = 'cover';
+        elem.style.backgroundPosition = 'center';
+        elem.style.backgroundRepeat = 'no-repeat';
+    });
+
+    // WebSocket setup
+    const ws = new WebSocket("ws://localhost:4000/ws");
+
+    ws.onopen = () => {
+        console.log("WebSocket connection established");
+    };
+
+    ws.onmessage = (event) => {
+        console.log("Message from server:", event.data);
+    };
+
+    ws.onerror = (error) => {
+        console.error("WebSocket error:", error);
+    };
+
+    ws.onclose = () => {
+        console.log("WebSocket connection closed.");
+    };
+
+    // Handle form submission
+    document.getElementById("myform").addEventListener('submit', function (event) {
+        event.preventDefault();
+        const travelFamily = document.getElementById("travel_family").value;
+        const travelDestination = document.getElementById("travel_destination").value;
+        const travelDate = document.getElementById("travel_date").value;
+        const travelNum = document.getElementById("travel_num").value;
+
+        const data = {
+            familyName: travelFamily,
+            destination: travelDestination,
+            date: travelDate,
+            passengers: travelNum,
+        };
+
+        if (ws.readyState === WebSocket.OPEN) {
+            ws.send(JSON.stringify(data));
+            console.log("Data sent over WebSocket:", data);
+        } else {
+            console.error("WebSocket is not open. Unable to send data.");
+        }
+    });
+    </script>
+</body>
+</html>

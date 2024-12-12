@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TravelMania</title>
+    <link rel="stylesheet" href="css/top.css"> <!-- External CSS for styling -->
+</head>
+<body>
+    <!-- Navbar Section -->
+    <div id="navbar">
+        <div id="logo">
+            <img src="travelmania.webp" alt="TravelMania Logo" width="80px">
+        </div>
+        <div id="scrolling-text">
+            <span>TravelMania</span>
+        </div>
+        <div id="nav-links">
+            <a href="/home" id="home">Home</a>
+            <a href="/contact" id="about">Contact Us</a>
+            <a href="/top" id="top-destinations">Top Destinations</a>
+        </div>
+    </div>
+
+    <!-- Main Background Image Section -->
+    <div id="background_img"></div>
+
+    <!-- Heading for Discover the Adventure -->
+    <p id="discover">Discover the Adventure</p>
+
+    <!-- Cities Section -->
+    <div id="cities">
+        <div id="city-options">
+            <a href="/city/london" class="city-card">
+                <div class="city-name">London</div>
+            </a>
+            <a href="/city/paris" class="city-card">
+                <div class="city-name">Paris</div>
+            </a>
+            <a href="/city/tokyo" class="city-card">
+                <div class="city-name">Tokyo</div>
+            </a>
+            <a href="/city/sydney" class="city-card">
+                <div class="city-name">Sydney</div>
+            </a>
+            <a href="/city/toronto" class="city-card">
+                <div class="city-name">Toronto</div>
+            </a>
+            <a href="/city/dubai" class="city-card">
+                <div class="city-name">Dubai</div>
+            </a>
+            <a href="/city/hong_kong" class="city-card">
+                <div class="city-name">Hong Kong</div>
+            </a>
+            
+            <a href="/city/singapore" class="city-card">
+                <div class="city-name">Singapore</div>
+            </a>
+            <a href="/city/san_francisco" class="city-card">
+                <div class="city-name">San Francisco</div>
+            </a>
+            <a href="/city/berlin" class="city-card">
+                <div class="city-name">Berlin</div>
+            </a>
+            <a href="/city/los_angeles" class="city-card">
+                <div class="city-name">Los Angeles</div>
+            </a>
+            <a href="/city/new_york" class="city-card">
+                <div class="city-name">New York</div>
+            </a>
+        </div>
+    </div>
+
+    <!-- External JavaScript (Add later) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const cityCards = document.querySelectorAll('.city-card');
+
+            cityCards.forEach(cityCard => {
+                const cityName = cityCard.querySelector('.city-name').textContent;
+                const imageUrl = `https://picsum.photos/400/300?random=${Math.floor(Math.random() * 1000)}`;
+
+                // Set the background image dynamically for each city card
+                cityCard.style.backgroundImage = `url(${imageUrl})`;
+            });
+        });
+    </script>
+</body>
+</html>
