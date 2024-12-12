@@ -66,11 +66,6 @@ app.get("/displayCookies",(req, res)=>{
   
 //   const { S3Client, HeadBucketCommand } = require("@aws-sdk/client-s3");
 
-//   const credentials = {
-//     region: "us-west-2",
-//     accessKeyId: "AKIAZN4PBGTPPVOTTOFF",
-//     secretAccessKey: "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",
-//   };
   
 const { S3Client, HeadBucketCommand, PutObjectCommand } = require("@aws-sdk/client-s3");
 
